@@ -1,0 +1,92 @@
+# FeeAI Platform
+
+This is a full-stack repository for the FeeAI platform, a one-stop trading and liquidity-providing platform built on the Solana blockchain. It integrates the Jup.AG API for trading, the TradingView API for investment visualization, and the Meteora API for liquidity pool management.
+
+## Repository Structure
+
+```
+FeeAI/
+|— backend/       # Backend services (API integrations, Solana interactions)
+|— frontend/      # Frontend application (React/Next.js)
+|— contracts/     # Solana programs for liquidity management
+|— scripts/       # Deployment and utility scripts
+|— README.md     # Project overview
+```
+
+## Features
+
+1. **Trading Page**:
+   - **Swap Functionality**: Integrated with Jup.AG API for token swaps.
+   - **Chart View**: Powered by TradingView API.
+   - **Positions Overview**: Displays current positions with an option to create liquidity pools.
+
+2. **Liquidity Pool Creation**:
+   - Seamless pool creation via the Meteora API.
+   - Fee structure: 0.25% for buys and sells, standard pool creation fee + 1%.
+
+3. **Backend Services**:
+   - API integrations for Jup.AG, Meteora, and TradingView.
+   - Transaction handling and fee calculation.
+
+4. **Smart Contracts**:
+   - Solana programs for dynamic liquidity management.
+
+## Getting Started
+
+### Prerequisites
+- Node.js
+- Python (for scripts)
+- Solana CLI
+- Docker (optional for containerized deployment)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/FeeAI.git
+cd FeeAI
+```
+
+2. Install dependencies:
+   - Backend: `cd backend && npm install`
+   - Frontend: `cd frontend && npm install`
+
+3. Configure environment variables:
+   - Create `.env` files in `backend` and `frontend` directories.
+   - Add API keys for Jup.AG, TradingView, and Meteora.
+
+### Running the Platform
+
+#### Frontend
+```bash
+cd frontend
+npm run dev
+```
+
+#### Backend
+```bash
+cd backend
+npm start
+```
+
+### Deployment
+- Use Docker for containerized deployment or deploy the frontend to Vercel/Netlify and the backend to AWS/GCP.
+
+## API Integration
+
+### Jup.AG API
+- Endpoint: [https://station.jup.ag/api-v6/post-swap-instructions](https://station.jup.ag/api-v6/post-swap-instructions)
+- Used for token swaps.
+
+### TradingView API
+- Used for displaying live charts.
+
+### Meteora API
+- Endpoint: [https://dlmm-api.meteora.ag/swagger-ui/](https://dlmm-api.meteora.ag/swagger-ui/)
+- Used for liquidity pool creation.
+
+## Contributions
+Feel free to fork this repository and create pull requests. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+This project is licensed under the MIT License.
