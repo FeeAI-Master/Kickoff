@@ -8,6 +8,7 @@ app = Flask(__name__)
 JUP_AG_API_URL = os.getenv("JUP_AG_API_URL", "https://station.jup.ag/api-v6/post-swap-instructions")
 METEORA_API_URL = os.getenv("METEORA_API_URL", "https://dlmm-api.meteora.ag/swagger-ui/")
 TRADINGVIEW_API_URL = os.getenv("TRADINGVIEW_API_URL")
+PHANTOM_API_URL = os.getenv("PHANTOM_API_URL", "https://docs.phantom.com/")
 
 # API Endpoints
 
@@ -46,6 +47,29 @@ def get_chart():
     if response.status_code == 200:
         return jsonify(response.json())
     return jsonify({"error": "Chart data retrieval failed", "details": response.text}), response.status_code
+
+@app.route('/connect-wallet', methods=['POST'])
+def connect_wallet():
+    """Connects to a wallet via Phantom API"""
+    data = request.json
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(f"{PHANTOM_API_URL}/wallet/connect", json=data, headers=headers)
+    if response.status_code == 200:
+        return jsonify(response.json())
+    return jsonify({"error": "Wallet connection failed", "details": response.text}), response.status_code
+
+@app.route('/wallet-balance', methods=['GET'])
+def wallet_balance():
+    """Fetches wallet balance via Phantom API"""
+    wallet_address = request.args.get('wallet_address')
+    if not wallet_address:
+        return jsonify({"error": "Wallet address is required"}), 400
+
+    headers = {'Content-Type': 'application/json'}
+    response = requests.get(f"{PHANTOM_API_URL}/wallet/balance?wallet_address={wallet_address}", headers=headers)
+    if response.status_code == 200:
+        return jsonify(response.json())
+    return jsonify({"error": "Failed to fetch wallet balance", "details": response.text}), response.status_code
 
 # Utility Functions
 
