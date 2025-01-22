@@ -1,0 +1,82 @@
+// FeeAI UI - React/Next.js Framework
+
+import React, { useState } from 'react';
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+
+export default function Home() {
+  const [swapInput, setSwapInput] = useState('');
+  const [chartData, setChartData] = useState([]);
+  const [positions, setPositions] = useState([]);
+
+  const handleSwap = () => {
+    // Swap functionality placeholder
+    console.log('Swap initiated for:', swapInput);
+  };
+
+  const handlePoolCreation = (position) => {
+    // Pool creation functionality placeholder
+    console.log('Create pool for position:', position);
+  };
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>FeeAI Platform</title>
+        <meta name="description" content="FeeAI - Simplified Trading and Liquidity Provision on Solana" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main className={styles.main}>
+        <h1 className={styles.title}>FeeAI Platform</h1>
+        <p className={styles.description}>Your one-stop trading and liquidity-providing platform on Solana.</p>
+
+        {/* Trading Interface */}
+        <div className={styles.tradingInterface}>
+          <div className={styles.chartView}>
+            <h2>Trading Chart</h2>
+            <div className={styles.chartPlaceholder}>TradingView Chart Integration</div>
+          </div>
+
+          <div className={styles.swapView}>
+            <h2>Swap Tokens</h2>
+            <input
+              type="text"
+              placeholder="Enter token pair"
+              value={swapInput}
+              onChange={(e) => setSwapInput(e.target.value)}
+              className={styles.input}
+            />
+            <button onClick={handleSwap} className={styles.swapButton}>Swap</button>
+          </div>
+        </div>
+
+        {/* Positions Overview */}
+        <div className={styles.positionsView}>
+          <h2>Your Positions</h2>
+          {positions.length === 0 ? (
+            <p>No active positions</p>
+          ) : (
+            <ul>
+              {positions.map((position, index) => (
+                <li key={index} className={styles.positionItem}>
+                  {position}
+                  <button
+                    onClick={() => handlePoolCreation(position)}
+                    className={styles.poolButton}
+                  >
+                    Create Pool
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </main>
+
+      <footer className={styles.footer}>
+        <p>FeeAI &copy; 2025 - Simplifying DeFi on Solana</p>
+      </footer>
+    </div>
+  );
+}
